@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>Document</title>
+    <script>
+
+function chart_maker() {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	theme: "light2",
+	title:{
+		text: "Simple Line Chart"
+	},
+	axisY:{
+		includeZero: false
+	},
+	data: [{        
+		type: "line",       
+		dataPoints: [
+			{ y: 450 },
+			{ y: 414},
+			{ y: 520, indexLabel: "highest",markerColor: "red", markerType: "triangle" },
+			{ y: 460 },
+			{ y: 450 },
+			{ y: 500 },
+			{ y: 480 },
+			{ y: 480 },
+			{ y: 410 , indexLabel: "lowest",markerColor: "DarkSlateGrey", markerType: "cross" },
+			{ y: 500 },
+			{ y: 480 },
+            { y: 510 }
+            
+		]
+    },
+    {        
+		type: "line",       
+		dataPoints: [
+			{ y: 350 },
+			{ y: 414},
+			{ y: 120, indexLabel: "highest",markerColor: "red", markerType: "triangle" },
+			{ y: 860 },
+			{ y: 150 },
+			{ y: 100 },
+			{ y: 680 },
+			{ y: 180 },
+			{ y: 710 , indexLabel: "lowest",markerColor: "DarkSlateGrey", markerType: "cross" },
+			{ y: 200 },
+			{ y: 680 },
+            { y: 310 },
+            
+		]
+	}
+]
+});
+chart.render();
+
+}
+function tableCreate(data){
+        
+        var tbl  = document.getElementById('tble')
+        var mains = ['date' , 'temperature' , 'precipitation' , 'humidity']
+    for(var i = 0; i < 4; i++){
+        let temp = data['day' + i]
+        var tr = tbl.insertRow();
+        for(var j = 0; j < 4; j++){
+                var td = tr.insertCell();
+                let mains_temp = mains[j]
+                td.appendChild(document.createTextNode(temp[mains_temp]));
+        }
+    }
+
+    } 
+     $(document).ready(function(){
+        
+         
+         $(city).click(function(){
+            var Url = 'http://localhost:3000/data?par='
+            var city = $('#city_value').val();
+            Url = Url + city
+             $.ajax({
+             url : Url,
+             type : "GET",
+             success : function(result){
+                 console.log('result'+result)
+                 tableCreate(result)
+                //  chart_maker()
+                 
+             },
+             error: function(error){
+                 console.log(`Error $(error)`)
+             }
+            })
+            
+         })
+     })
+    </script>
+</head>
+<body>
+      
+    <div class="ui container BG">
+            <div class="ui grid">
+                    <div class="row">
+                            <div class="Your-Food-Log-Today"> <div class="six wide column">Weather Statistics</div></div>
+                   </div>
+                   <div class="row">
+                        <div class="ui action input search_box">
+                                <input type="text" placeholder="Search..." class="input_size" id="city_value">
+                                <button class="ui button btn_size" id="city">Enter City</button>
+                              </div>
+                   </div>
+                   <div class="row">
+                    <table class="ui inverted blue selectable celled right aligned table added" id="tble">
+                      <thead>
+                        <th class="left aligned">Date</th>
+                        <th>Temperature (in Celcius)</th>
+                        <th>Precipitation (in inches)</th>
+                        <th> Humidity </th>
+                      </thead>
+                    </table>
+                    
+           </div>
+      </div>
+    </div>
+    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+</html>

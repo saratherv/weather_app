@@ -1,0 +1,36 @@
+.BG {
+  width: 1080px !important;
+  height: 1702px !important;
+  background-color: rgb(248, 247, 249);
+}
+
+.Your-Food-Log-Today {
+  width: 426px;
+  height: 36px;
+  font-family: Roboto;
+  font-size: 36px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000000;
+  margin-top: 100px;
+  margin-left: 99px;
+}
+.search_box {
+  margin-top: 72px;
+  margin-left: 99px;
+}
+.input_size {
+  width : 500px !important;
+}
+.btn_size {
+  width: 150px !important;
+}
+.added {
+  width: 800px !important;
+    margin-top: 100px !important;
+    margin-left: 99px !important;
+}
